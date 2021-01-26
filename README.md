@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/gdubin/uls.svg?branch=master)](https://travis-ci.com/gdubin/uls) [![codecov](https://codecov.io/gh/gdubin/uls/branch/master/graph/badge.svg)](https://codecov.io/gh/gdubin/uls)
+[![Build Status](https://travis-ci.com/gdubin/uls.svg?branch=main)](https://travis-ci.com/gdubin/uls) [![codecov](https://codecov.io/gh/gdubin/uls/branch/master/graph/badge.svg)](https://codecov.io/gh/gdubin/uls)
 
 # ULS
 
