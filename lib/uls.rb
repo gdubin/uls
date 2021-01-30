@@ -1,4 +1,3 @@
-require 'pry'
 require 'uls/version'
 require 'uls/configuration'
 require 'uls/database'

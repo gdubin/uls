@@ -21,9 +21,9 @@ module ULS
 
     # Different base URLs whether we're looking for the daily updates or the full
     # weekly downloads.
-    DAILY_BASE_URL = 'https://wireless.fcc.gov/uls/data/daily'.freeze
-    WEEKLY_BASE_URL = 'https://wireless.fcc.gov/uls/data/complete'.freeze
-
+    DAILY_BASE_URL = 'ftp://wirelessftp.fcc.gov/pub/uls/daily'.freeze
+    WEEKLY_BASE_URL = 'ftp://wirelessftp.fcc.gov/pub/uls/complete'.freeze
+    
     attr_accessor :service
 
     def self.amateur_radio
