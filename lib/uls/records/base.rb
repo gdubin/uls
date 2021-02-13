@@ -36,10 +36,11 @@ module ULS
         values = line.split(FIELD_SEPARATOR)
         values.shift
 
-        values.each_with_index do |value, index|
-          break if index >= Entity.fields.size
 
-          field = Entity.fields[index]
+        values.each_with_index do |value, index|
+          break if index >= self.class.fields.size
+
+          field = self.class.fields[index]
           setter = "#{field[:attribute]}="
           value = convert(value, field[:type])
 
