@@ -43,7 +43,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (>= 2.2.33)
   codecov (~> 0.6.0)
   pry (~> 0.12.2)
   rake (~> 12.3.3)
@@ -52,4 +52,4 @@ DEPENDENCIES
   uls!
 
 BUNDLED WITH
-   1.17.2
+   2.3.16
