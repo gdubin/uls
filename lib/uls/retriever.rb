@@ -1,5 +1,6 @@
 require 'date'
 require 'open-uri'
+require 'net/http'
 
 module ULS
   class Retriever
@@ -21,8 +22,8 @@ module ULS
 
     # Different base URLs whether we're looking for the daily updates or the full
     # weekly downloads.
-    DAILY_BASE_URL = 'ftp://wirelessftp.fcc.gov/pub/uls/daily'.freeze
-    WEEKLY_BASE_URL = 'ftp://wirelessftp.fcc.gov/pub/uls/complete'.freeze
+    DAILY_BASE_URL = 'https://data.fcc.gov/download/pub/uls/daily'.freeze
+    WEEKLY_BASE_URL = 'https://data.fcc.gov/download/pub/uls/complete'.freeze
     
     attr_accessor :service
 
@@ -76,11 +77,20 @@ module ULS
     protected
 
     def download(url)
+      uri = URI(url)
+
       filename = url.split('/').last
       path = "#{ULS.configuration.tmpdir}/#{filename}"
+      Net::HTTP.start(uri.host, uri.port, use_ssl: true ) do |http|
+        request = Net::HTTP::Get.new uri
 
-      File.open(path, 'w') do |file|
-        IO.copy_stream(open(url), file)
+        http.request request do |response|
+          open path, 'w' do |io|
+            response.read_body do |chunk|
+              io.write chunk
+            end
+          end
+        end
       end
 
       path
