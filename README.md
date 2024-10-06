@@ -47,19 +47,21 @@ The FCC splits their data into several categories.  Each category is represented
 For example, to download the entire license database for amateur radio:
 
 ```
-database = ULS::Retriever.amateur_radio.weekly(:licenses)
+compressed_database_path = ULS::Retriever.amateur_radio.weekly(:licenses)
 ```
+
+This will return a absolute path to a zip file once the download is complete.
 
 The weekly database contains all of the data and is republished weekly.  Daily database updates are also provided that are much smaller and only contain the specified day's data:
 
 ```
-database = ULS::Retriever.amateur_radio.daily(:licenses)
+compressed_database_path = ULS::Retriever.amateur_radio.daily(:licenses)
 ```
 
 The above line will download the previous day's updates.  It also takes a second parameter which corresponds to the [Date#wday](https://apidock.com/ruby/Date/wday) value.  So if you wanted to download last Tuesday's daily license file:
 
 ```
-database = ULS::Retriever.amateur_radio.daily(:licenses, 2)
+compressed_database_path = ULS::Retriever.amateur_radio.daily(:licenses, 2)
 ```
 
 ##### Parsing Databases
@@ -67,6 +69,7 @@ database = ULS::Retriever.amateur_radio.daily(:licenses, 2)
 After you have an available database to work with, you may start interacting with the records within it:
 
 ```
+database = ULS::Database.new(compressed_database_path)
 database.name_and_addresses.each_record do |record|
   # do something
 end
@@ -91,14 +94,6 @@ database.delete!
 ```
 
 The above will not only remove all the extracted files but also delete the compressed file.
-
-There may be instances where you want to keep the source files around.  A database can be reconstructed from the filesystem by calling:
-
-```
-ULS::Database.new('/path/to/zip/or/extracted/directory')
-```
-
-You may pass the path to the zip file, or the already extracted directory, to interact with the records within.
 
 ## Development
 
