@@ -10,13 +10,13 @@ module ULS
     def each_line(&_block)
       return unless File.exist?(path)
 
-      File.foreach(path) { |line| yield(line) }
+      File.foreach(path) do |line|
+        yield(line)
+      end
     end
 
     def each_record(&_block)
-      return unless File.exist?(path)
-
-      File.foreach(path) do |line|
+      each_line do |line|
         record = line_to_record(line)
         yield(record)
       end
